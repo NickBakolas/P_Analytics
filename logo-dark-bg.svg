@@ -1,0 +1,46 @@
+<svg width="400" height="100" viewBox="0 0 400 100" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+      .logo-p { 
+        font-family: 'Space Grotesk', sans-serif; 
+        font-size: 56px; 
+        font-weight: 700; 
+        letter-spacing: -0.05em; 
+        fill: #FFFFFF; 
+      }
+      .logo-underscore { 
+        font-family: 'Space Grotesk', sans-serif; 
+        font-size: 56px; 
+        font-weight: 400; 
+        fill: #FCD116; 
+      }
+      .logo-analytics { 
+        font-family: 'Space Grotesk', sans-serif; 
+        font-size: 56px; 
+        font-weight: 700; 
+        letter-spacing: -0.05em; 
+        fill: #FFFFFF; 
+      }
+      .logo-dot { 
+        font-family: 'Space Grotesk', sans-serif; 
+        font-size: 56px; 
+        font-weight: 700; 
+        fill: #FCD116; 
+      }
+    </style>
+  </defs>
+  
+  <!-- P -->
+  <text x="0" y="65" class="logo-p">P</text>
+  
+  <!-- _ (underscore) -->
+  <text x="35" y="65" class="logo-underscore">_</text>
+  
+  <!-- Analytics -->
+  <text x="55" y="65" class="logo-analytics">Analytics</text>
+  
+  <!-- . (dot) -->
+  <text x="320" y="65" class="logo-dot">.</text>
+</svg>
+

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P_Analytics Logo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+            background: #050505;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 40px;
+        }
+
+        .logo-container {
+            background: transparent;
+            padding: 40px;
+        }
+
+        .logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 4rem;
+            font-weight: 700;
+            letter-spacing: -0.05em;
+            line-height: 1;
+            white-space: nowrap;
+            display: inline-flex;
+            align-items: baseline;
+        }
+
+        .logo .underscore {
+            color: #FCD116;
+            font-weight: 400;
+            margin-right: 4px;
+        }
+
+        .logo .text {
+            color: #ffffff;
+        }
+
+        .logo .dot {
+            color: #FCD116;
+        }
+
+        /* Print styles - white background for business cards */
+        @media print {
+            body {
+                background: white;
+            }
+            
+            .logo-container {
+                background: white;
+            }
+            
+            /* Option 1: Logo on white background (white text becomes black) */
+            .logo-version-white-bg .logo .text {
+                color: #000000;
+            }
+            .logo-version-white-bg .logo .underscore,
+            .logo-version-white-bg .logo .dot {
+                color: #FCD116;
+            }
+            
+            /* Option 2: Logo on dark background */
+            .logo-version-dark-bg {
+                background: #050505;
+            }
+        }
+
+        /* Different sizes for business cards */
+        .size-small {
+            font-size: 1.5rem;
+        }
+
+        .size-medium {
+            font-size: 2.5rem;
+        }
+
+        .size-large {
+            font-size: 4rem;
+        }
+
+        .size-xlarge {
+            font-size: 6rem;
+        }
+
+        /* Variants */
+        .variant-vertical {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .variant-horizontal {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+        }
+
+        /* For SVG export version */
+        .svg-container {
+            background: white;
+            padding: 40px;
+            display: inline-block;
+        }
+
+        .info {
+            color: #A1A1AA;
+            font-size: 0.875rem;
+            margin-top: 20px;
+            max-width: 600px;
+        }
+
+        .info h3 {
+            color: #FCD116;
+            margin-bottom: 10px;
+        }
+
+        .info ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .info li {
+            margin: 8px 0;
+        }
+
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .preview-card {
+            background: #121212;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+        }
+
+        .preview-card h4 {
+            color: #FCD116;
+            margin-bottom: 20px;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <h1 style="color: #FCD116; margin-bottom: 40px; font-size: 1.5rem; text-align: center;">P_Analytics Logo - Business Card Versions</h1>
+        
+        <div class="preview-grid">
+            <!-- Standard Logo - Dark Background -->
+            <div class="preview-card">
+                <h4>Standard (Dark Background)</h4>
+                <div class="logo size-medium">
+                    <span class="text">P</span>
+                    <span class="underscore">_</span>
+                    <span class="text">Analytics</span>
+                    <span class="dot">.</span>
+                </div>
+            </div>
+
+            <!-- Standard Logo - White Background -->
+            <div class="preview-card logo-version-white-bg" style="background: white;">
+                <h4 style="color: #FCD116;">Standard (White Background)</h4>
+                <div class="logo size-medium">
+                    <span class="text" style="color: #000000;">P</span>
+                    <span class="underscore">_</span>
+                    <span class="text" style="color: #000000;">Analytics</span>
+                    <span class="dot">.</span>
+                </div>
+            </div>
+
+            <!-- Large Version -->
+            <div class="preview-card">
+                <h4>Large</h4>
+                <div class="logo size-xlarge">
+                    <span class="text">P</span>
+                    <span class="underscore">_</span>
+                    <span class="text">Analytics</span>
+                    <span class="dot">.</span>
+                </div>
+            </div>
+
+            <!-- Small Version -->
+            <div class="preview-card">
+                <h4>Small (for footers)</h4>
+                <div class="logo size-small">
+                    <span class="text">P</span>
+                    <span class="underscore">_</span>
+                    <span class="text">Analytics</span>
+                    <span class="dot">.</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info" style="margin-top: 60px; text-align: center; max-width: 800px; margin-left: auto; margin-right: auto;">
+            <h3>Χρήση για Επαγγελματικές Κάρτες</h3>
+            <ul>
+                <li><strong>Για dark/black background:</strong> Χρησιμοποίησε την "Standard (Dark Background)" έκδοση</li>
+                <li><strong>Για white/light background:</strong> Χρησιμοποίησε την "Standard (White Background)" έκδοση (μαύρο κείμενο)</li>
+                <li><strong>Για print:</strong> Κάνε right-click στο λογότυπο → "Save image as" ή χρησιμοποίησε browser screenshot tool</li>
+                <li><strong>Colors:</strong> #FCD116 (κίτρινο), #FFFFFF (λευκό), #000000 (μαύρο)</li>
+                <li><strong>Font:</strong> Space Grotesk (700 weight για P/Analytics, 400 για underscore)</li>
+            </ul>
+            
+            <div style="margin-top: 30px; padding: 20px; background: #121212; border-radius: 8px;">
+                <h3 style="color: #FCD116; margin-bottom: 15px;">SVG Version (Recommended for printing)</h3>
+                <div style="background: white; padding: 30px; border-radius: 8px; display: inline-block; margin: 10px;">
+                    <svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+                                .logo-text { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; letter-spacing: -0.05em; fill: #000000; }
+                                .logo-underscore { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 400; fill: #FCD116; }
+                                .logo-dot { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; fill: #FCD116; }
+                            </style>
+                        </defs>
+                        <text x="0" y="50" class="logo-text">P</text>
+                        <text x="30" y="50" class="logo-underscore">_</text>
+                        <text x="50" y="50" class="logo-text">Analytics</text>
+                        <text x="240" y="50" class="logo-dot">.</text>
+                    </svg>
+                </div>
+                <div style="background: #050505; padding: 30px; border-radius: 8px; display: inline-block; margin: 10px;">
+                    <svg width="300" height="80" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                            <style>
+                                @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
+                                .logo-text-dark { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; letter-spacing: -0.05em; fill: #FFFFFF; }
+                                .logo-underscore-dark { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 400; fill: #FCD116; }
+                                .logo-dot-dark { font-family: 'Space Grotesk', sans-serif; font-size: 48px; font-weight: 700; fill: #FCD116; }
+                            </style>
+                        </defs>
+                        <text x="0" y="50" class="logo-text-dark">P</text>
+                        <text x="30" y="50" class="logo-underscore-dark">_</text>
+                        <text x="50" y="50" class="logo-text-dark">Analytics</text>
+                        <text x="240" y="50" class="logo-dot-dark">.</text>
+                    </svg>
+                </div>
+                <p style="margin-top: 15px; font-size: 0.75rem; color: #A1A1AA;">
+                    Κάνε right-click στα SVG → "Save image as" για να τα αποθηκεύσεις σε PNG/SVG
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
