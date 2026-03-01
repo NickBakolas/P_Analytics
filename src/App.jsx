@@ -113,7 +113,8 @@ const App = () => {
   const [detailContext, setDetailContext] = useState(null);
   const [lang, setLang] = useState('el');
   const [bookingSelection, setBookingSelection] = useState({ date: null, time: null });
-  const [isSending, setIsSending] = useState(false); 
+  const [isSending, setIsSending] = useState(false);
+  const [contactFormData, setContactFormData] = useState({ name: '', email: '', message: '' }); 
 
   // --- ΣΥΝΔΕΣΗ ΜΕ SANITY ---
   const [dynamicBio, setDynamicBio] = useState([]);
@@ -137,10 +138,6 @@ const App = () => {
   const goToNextDetail = () => { if (!detailContext) return; const nextIndex = (detailContext.index + 1) % detailContext.items.length; setDetailContext({ ...detailContext, index: nextIndex }); };
 
   useEffect(() => {
-    document.documentElement.lang = lang === 'el' ? 'el' : 'en';
-  }, [lang]);
-
-  useEffect(() => {
     const handleScroll = () => { setScrollY(window.scrollY); };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -156,13 +153,26 @@ const App = () => {
     if (element) { element.scrollIntoView({ behavior: 'smooth' }); setIsMobileMenuOpen(false); }
   };
 
+  const handleBookingSelect = (dateKey, time) => {
+    setBookingSelection(prev => ({ ...prev, date: dateKey, time }));
+  };
+
   const handleContactSubmit = async (e) => {
     e.preventDefault();
-    if (!bookingSelection.date || !bookingSelection.time) { alert("Please select a slot."); return; }
+    if (!bookingSelection.date || !bookingSelection.time) { alert(lang === 'el' ? 'Επιλέξτε ραντεβού.' : 'Please select a slot.'); return; }
     setIsSending(true);
-    // ... (Υπόλοιπο EmailJS logic)
+    try {
+      const stored = safeParseBookings(localStorage.getItem('panalytics_bookings'));
+      const key = bookingSelection.date;
+      stored[key] = [...(stored[key] || []), bookingSelection.time];
+      localStorage.setItem('panalytics_bookings', JSON.stringify(stored));
+      setIsContactModalOpen(false);
+      setBookingSelection({ date: null, time: null });
+      setContactFormData({ name: '', email: '', message: '' });
+    } catch (err) {
+      alert(t.contactForm.error);
+    }
     setIsSending(false);
-    setIsContactModalOpen(false);
   };
 
   return (
@@ -178,23 +188,42 @@ const App = () => {
             <button onClick={toggleLang} className="text-sm font-bold border border-white/20 px-2 py-1 rounded">{lang.toUpperCase()}</button>
             <Button onClick={() => setIsContactModalOpen(true)} className="py-2 text-xs">{t.nav.contact}</Button>
           </div>
+          <div className="flex lg:hidden items-center gap-2">
+            <button onClick={toggleLang} className="text-sm font-bold border border-white/20 px-2 py-1 rounded">{lang.toUpperCase()}</button>
+            <button onClick={() => setIsMobileMenuOpen(true)} className="p-2 hover:text-[#FCD116] transition-colors" aria-label="Menu"><Menu size={24} /></button>
+          </div>
         </div>
       </nav>
 
+      {/* Mobile Menu Overlay */}
+      {isMobileMenuOpen && (
+        <div className="fixed inset-0 z-[60] bg-black/95 backdrop-blur-xl lg:hidden">
+          <div className="flex flex-col h-full pt-24 px-6">
+            <button onClick={() => setIsMobileMenuOpen(false)} className="absolute top-6 right-6 p-2 text-zinc-400 hover:text-white"><X size={24} /></button>
+            <div className="flex flex-col gap-6">
+              {['methodology', 'profile', 'expertise'].map(id => (
+                <a key={id} href={`#${id}`} onClick={(e) => { handleNavClick(e, id); setIsMobileMenuOpen(false); }} className="text-xl hover:text-[#FCD116] transition-colors">{t.nav[id === 'profile' ? 'background' : id]}</a>
+              ))}
+              <Button onClick={() => { setIsContactModalOpen(true); setIsMobileMenuOpen(false); }} className="py-3">{t.nav.contact}</Button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Hero Section */}
-      <section className="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-20 container mx-auto px-6 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-0">
-        <div className="space-y-5 sm:space-y-8 min-w-0">
-          <div className="inline-block max-w-full px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-xs whitespace-normal">{t.hero.badge}</div>
-          <h1 className={`font-bold leading-tight break-words ${lang === 'el' ? 'text-xl sm:text-3xl md:text-5xl lg:text-6xl' : 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl'}`} style={{ overflowWrap: 'anywhere' }}>{t.hero.title}</h1>
-          <p className={`text-zinc-400 leading-relaxed break-words ${lang === 'el' ? 'text-sm sm:text-base lg:text-lg' : 'text-base sm:text-lg'}`} style={{ overflowWrap: 'anywhere' }}>{t.hero.subtitle}</p>
-          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+      <section className="pt-32 pb-20 container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
+        <div className="space-y-8 min-w-0">
+          <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-xs">{t.hero.badge}</div>
+          <h1 className="text-4xl md:text-6xl font-bold leading-tight break-words" style={{ overflowWrap: 'break-word' }}>{t.hero.title}</h1>
+          <p className="text-zinc-400 text-lg leading-relaxed break-words" style={{ overflowWrap: 'break-word' }}>{t.hero.subtitle}</p>
+          <div className="flex gap-4">
             <Button onClick={() => setIsContactModalOpen(true)}>{t.hero.primary} <ArrowRight size={16}/></Button>
             <Button variant="secondary" onClick={(e) => handleNavClick(e, 'profile')}>{t.hero.secondary}</Button>
           </div>
         </div>
         {/* Chart Visualization */}
-        <div className="bg-[#121212] border border-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 relative overflow-hidden group min-w-0">
-            <div className="h-48 sm:h-56 lg:h-64">
+        <div className="bg-[#121212] border border-white/5 rounded-3xl p-8 relative overflow-hidden group">
+            <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={chartData}>
                         <defs><linearGradient id="colorKpi" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#FCD116" stopOpacity={0.3}/><stop offset="95%" stopColor="#FCD116" stopOpacity={0}/></linearGradient></defs>
@@ -271,15 +300,43 @@ const App = () => {
         </div>
       )}
 
-      {/* Contact Modal (Placeholder) */}
+      {/* Contact Modal - Booking + Form */}
       {isContactModalOpen && (
-          <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center">
-              <div className="text-center space-y-6">
-                  <h2 className="text-3xl font-bold">Contact P_Analytics</h2>
-                  <p className="text-zinc-400">Booking system initialized...</p>
-                  <Button onClick={() => setIsContactModalOpen(false)}>Close</Button>
+        <div className="fixed inset-0 z-[100] bg-black/95 flex items-center justify-center p-4 overflow-y-auto">
+          <div className="w-full max-w-2xl bg-[#0A0A0A] border border-white/10 rounded-2xl p-6 sm:p-8 relative">
+            <button onClick={() => { setIsContactModalOpen(false); setBookingSelection({ date: null, time: null }); setContactFormData({ name: '', email: '', message: '' }); }} className="absolute top-4 right-4 text-zinc-500 hover:text-white"><X size={20} /></button>
+            <h2 className="text-2xl font-bold mb-2">{t.contactForm.title}</h2>
+            <p className="text-zinc-400 text-sm mb-6">{t.contactForm.desc}</p>
+            <form onSubmit={handleContactSubmit} className="grid sm:grid-cols-2 gap-6">
+              <div className="sm:col-span-2">
+                <BookingCalendar onSelectSlot={handleBookingSelect} lang={lang} />
               </div>
+              <div className="sm:col-span-2 flex flex-wrap gap-2 items-center text-sm">
+                {bookingSelection.date && bookingSelection.time && (
+                  <span className="px-3 py-1 rounded-lg bg-[#FCD116]/20 text-[#FCD116]">
+                    {t.contactForm.selectedSlot}: {bookingSelection.date} {bookingSelection.time}
+                  </span>
+                )}
+              </div>
+              <div>
+                <label className="block text-xs text-zinc-500 mb-1">{t.contactForm.name}</label>
+                <input type="text" value={contactFormData.name} onChange={e => setContactFormData(p => ({ ...p, name: e.target.value }))} className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:border-[#FCD116]/50 outline-none" placeholder={t.contactForm.name} required />
+              </div>
+              <div>
+                <label className="block text-xs text-zinc-500 mb-1">{t.contactForm.email}</label>
+                <input type="email" value={contactFormData.email} onChange={e => setContactFormData(p => ({ ...p, email: e.target.value }))} className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:border-[#FCD116]/50 outline-none" placeholder={t.contactForm.email} required />
+              </div>
+              <div className="sm:col-span-2">
+                <label className="block text-xs text-zinc-500 mb-1">{t.contactForm.message}</label>
+                <textarea value={contactFormData.message} onChange={e => setContactFormData(p => ({ ...p, message: e.target.value }))} rows={3} className="w-full px-4 py-2 rounded-lg bg-white/5 border border-white/10 text-white placeholder-zinc-500 focus:border-[#FCD116]/50 outline-none resize-none" placeholder={t.contactForm.message} />
+              </div>
+              <div className="sm:col-span-2 flex gap-3">
+                <Button type="submit" disabled={isSending}>{isSending ? <Loader2 className="w-4 h-4 animate-spin" /> : null} {t.contactForm.submit}</Button>
+                <Button type="button" variant="secondary" onClick={() => { setIsContactModalOpen(false); setBookingSelection({ date: null, time: null }); setContactFormData({ name: '', email: '', message: '' }); }}>{t.legal.close}</Button>
+              </div>
+            </form>
           </div>
+        </div>
       )}
     </div>
   );
