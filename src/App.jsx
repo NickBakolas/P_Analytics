@@ -1050,9 +1050,9 @@ const App = () => {
                             <span className="block text-[10px] text-zinc-500">{t.hero.report.updated}</span>
                         </div>
                     </div>
-                    <div className="font-mono text-xs text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                        {t.hero.report.status}
+                    <div className="font-mono text-xs text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                        <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
+                        <span>{t.hero.report.status}</span>
                     </div>
                 </div>
 
