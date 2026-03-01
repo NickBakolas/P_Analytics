@@ -281,8 +281,18 @@ const App = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 border-t border-white/5 text-center text-zinc-600 text-sm">
-        <p>{t.footer.copyright}</p>
+      <footer className="py-12 border-t border-white/5">
+        <div className="container mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-zinc-600 text-sm">{t.footer.copyright}</p>
+          <div className="flex items-center gap-4">
+            <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-[#FCD116] transition-colors" aria-label="LinkedIn">
+              <Linkedin size={20} />
+            </a>
+            <a href="https://github.com/NickBakolas" target="_blank" rel="noopener noreferrer" className="text-zinc-500 hover:text-[#FCD116] transition-colors" aria-label="GitHub">
+              <Github size={20} />
+            </a>
+          </div>
+        </div>
       </footer>
 
       {/* Detail Modal */}
