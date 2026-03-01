@@ -137,6 +137,10 @@ const App = () => {
   const goToNextDetail = () => { if (!detailContext) return; const nextIndex = (detailContext.index + 1) % detailContext.items.length; setDetailContext({ ...detailContext, index: nextIndex }); };
 
   useEffect(() => {
+    document.documentElement.lang = lang === 'el' ? 'el' : 'en';
+  }, [lang]);
+
+  useEffect(() => {
     const handleScroll = () => { setScrollY(window.scrollY); };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -179,10 +183,10 @@ const App = () => {
 
       {/* Hero Section */}
       <section className="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-20 container mx-auto px-6 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-0">
-        <div className="space-y-5 sm:space-y-8">
-          <div className="inline-block px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-xs">{t.hero.badge}</div>
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words">{t.hero.title}</h1>
-          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">{t.hero.subtitle}</p>
+        <div className="space-y-5 sm:space-y-8 min-w-0">
+          <div className="inline-block max-w-full px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-xs whitespace-normal">{t.hero.badge}</div>
+          <h1 className={`font-bold leading-tight break-words ${lang === 'el' ? 'text-xl sm:text-3xl md:text-5xl lg:text-6xl' : 'text-2xl sm:text-4xl md:text-5xl lg:text-6xl'}`} style={{ overflowWrap: 'anywhere' }}>{t.hero.title}</h1>
+          <p className={`text-zinc-400 leading-relaxed break-words ${lang === 'el' ? 'text-sm sm:text-base lg:text-lg' : 'text-base sm:text-lg'}`} style={{ overflowWrap: 'anywhere' }}>{t.hero.subtitle}</p>
           <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button onClick={() => setIsContactModalOpen(true)}>{t.hero.primary} <ArrowRight size={16}/></Button>
             <Button variant="secondary" onClick={(e) => handleNavClick(e, 'profile')}>{t.hero.secondary}</Button>
