@@ -178,19 +178,19 @@ const App = () => {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-20 container mx-auto px-6 grid lg:grid-cols-2 gap-12 items-center">
-        <div className="space-y-8">
-          <div className="inline-block px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-xs">{t.hero.badge}</div>
-          <h1 className="text-4xl md:text-6xl font-bold leading-tight">{t.hero.title}</h1>
-          <p className="text-zinc-400 text-lg leading-relaxed">{t.hero.subtitle}</p>
-          <div className="flex gap-4">
+      <section className="pt-24 sm:pt-28 md:pt-32 pb-12 sm:pb-20 container mx-auto px-6 grid lg:grid-cols-2 gap-8 sm:gap-12 items-center min-h-0">
+        <div className="space-y-5 sm:space-y-8">
+          <div className="inline-block px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-xs">{t.hero.badge}</div>
+          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight break-words">{t.hero.title}</h1>
+          <p className="text-zinc-400 text-base sm:text-lg leading-relaxed">{t.hero.subtitle}</p>
+          <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Button onClick={() => setIsContactModalOpen(true)}>{t.hero.primary} <ArrowRight size={16}/></Button>
             <Button variant="secondary" onClick={(e) => handleNavClick(e, 'profile')}>{t.hero.secondary}</Button>
           </div>
         </div>
         {/* Chart Visualization */}
-        <div className="bg-[#121212] border border-white/5 rounded-3xl p-8 relative overflow-hidden group">
-            <div className="h-64">
+        <div className="bg-[#121212] border border-white/5 rounded-2xl sm:rounded-3xl p-4 sm:p-6 lg:p-8 relative overflow-hidden group min-w-0">
+            <div className="h-48 sm:h-56 lg:h-64">
                 <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={chartData}>
                         <defs><linearGradient id="colorKpi" x1="0" y1="0" x2="0" y2="1"><stop offset="5%" stopColor="#FCD116" stopOpacity={0.3}/><stop offset="95%" stopColor="#FCD116" stopOpacity={0}/></linearGradient></defs>
