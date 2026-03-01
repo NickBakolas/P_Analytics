@@ -1042,15 +1042,15 @@ const App = () => {
              <div className="absolute -inset-1 bg-gradient-to-r from-[#FCD116]/20 to-transparent opacity-30 blur-3xl rounded-3xl"></div>
              <div className="relative bg-[#121212]/80 border border-white/10 rounded-2xl p-4 md:p-6 shadow-2xl backdrop-blur-xl ring-1 ring-white/5">
                 {/* Header of "Software" */}
-                <div className="flex items-center justify-between mb-6 border-b border-white/5 pb-4">
-                    <div className="flex items-center gap-3">
-                        <div className="p-2 bg-white/5 rounded-lg text-[#FCD116]"><FileText className="w-4 h-4" /></div>
-                        <div>
-                            <span className="block font-medium text-white text-sm">{t.hero.report.name}</span>
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6 border-b border-white/5 pb-4">
+                    <div className="flex items-center gap-3 min-w-0">
+                        <div className="p-2 bg-white/5 rounded-lg text-[#FCD116] shrink-0"><FileText className="w-4 h-4" /></div>
+                        <div className="min-w-0">
+                            <span className="block font-medium text-white text-sm truncate">{t.hero.report.name}</span>
                             <span className="block text-[10px] text-zinc-500">{t.hero.report.updated}</span>
                         </div>
                     </div>
-                    <div className="font-mono text-xs text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded flex items-center gap-1.5 shrink-0 whitespace-nowrap">
+                    <div className="font-mono text-xs text-emerald-500 bg-emerald-500/10 px-2 py-1 rounded flex items-center gap-1.5 w-fit shrink-0 whitespace-nowrap">
                         <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse shrink-0"></span>
                         <span>{t.hero.report.status}</span>
                     </div>
