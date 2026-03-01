@@ -1002,14 +1002,14 @@ const App = () => {
       {/* --- Hero Section --- */}
       <section className="relative min-h-screen flex items-center pt-24 pb-12 overflow-hidden">
         <div className="container mx-auto px-6 relative z-10 grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <div className="space-y-6 md:space-y-8 text-center lg:text-left order-1 lg:order-1">
+          <div className="space-y-6 md:space-y-8 text-center lg:text-left order-1 lg:order-1 min-w-0">
             <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-[#FCD116] text-[10px] md:text-xs font-medium backdrop-blur-sm mx-auto lg:mx-0">
               <Database className="w-3.5 h-3.5" /> {t.hero.badge}
             </div>
-            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight">
+            <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.15] tracking-tight break-words" style={{ overflowWrap: 'break-word' }}>
               {t.hero.title}
             </h1>
-            <p className="text-base md:text-lg text-zinc-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light">
+            <p className="text-base md:text-lg text-zinc-400 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light break-words" style={{ overflowWrap: 'break-word' }}>
               {t.hero.subtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4 w-full">
@@ -1038,7 +1038,7 @@ const App = () => {
           </div>
 
           {/* Abstract Data Visualization */}
-          <div className="relative order-2 lg:order-2">
+          <div className="relative order-2 lg:order-2 min-w-0 w-full">
              <div className="absolute -inset-1 bg-gradient-to-r from-[#FCD116]/20 to-transparent opacity-30 blur-3xl rounded-3xl"></div>
              <div className="relative bg-[#121212]/80 border border-white/10 rounded-2xl p-4 md:p-6 shadow-2xl backdrop-blur-xl ring-1 ring-white/5">
                 {/* Header of "Software" */}
@@ -1056,8 +1056,8 @@ const App = () => {
                     </div>
                 </div>
 
-                {/* Live Chart */}
-                <div className="h-48 md:h-64 w-full mb-6">
+                {/* Live Chart - fixed size, same in all languages */}
+                <div className="h-48 md:h-64 min-h-[12rem] md:min-h-[16rem] w-full mb-6">
                    <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={chartData}>
                       <defs>
